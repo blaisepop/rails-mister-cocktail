@@ -8,6 +8,16 @@ class CocktailsController < ApplicationController
     @cocktail = Cocktail.new
   end
 
+  def edit
+    @cocktail = Cocktail.find(params[:id])
+  end
+
+  def update
+    @cocktail = Cocktail.find(params[:id])
+    @cocktail.update(cocktail_params)
+    redirect_to cocktail_path(@cocktail)
+  end
+
   def show
     @cocktail = Cocktail.find(params[:id])
   end
@@ -20,6 +30,8 @@ class CocktailsController < ApplicationController
       render :new
     end
   end
+
+private
 
   def cocktail_params
     params.require(:cocktail).permit(:name)
